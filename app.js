@@ -10,7 +10,7 @@ class Despesa {
 
     validarDados() {
         for (let i in this) {
-            if(this[i] == undefined || this[i] == '' || this[i] == null){
+            if (this[i] == undefined || this[i] == '' || this[i] == null) {
                 return false
             }
         }
@@ -66,12 +66,19 @@ function cadastrarDespesa() {
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
-        $('#modalRetorno .modal-title').append('Registro salva com sucesso')
-        $('#modalRetorno .modal-body p').append('Despesa cadastrada com sucesso')
+        document.getElementById('modal-titulo').className = 'modal-title text-success'
+      
+        document.getElementById('modal-titulo').innerHTML = 'Registro salva com sucesso'
+        document.getElementById('modal-msg').innerHTML = 'Despesa cadastrada com sucesso'
+        //$('#modalRetorno .modal-title').append('Registro salva com sucesso')
+        //$('#modalRetorno .modal-body p').append('Despesa cadastrada com sucesso')
         $('#modalRetorno').modal('show')
     } else {
-        $('#modalRetorno .modal-title').append('Erro na gravação')
-        $('#modalRetorno .modal-body p').append('Existem campos obrigatórios que não foram preenchidos')
+        document.getElementById('modal-titulo').className = 'modal-title text-danger'
+        document.getElementById('modal-titulo').innerHTML = 'Erro na gravação'
+        document.getElementById('modal-msg').innerHTML = 'Existem campos obrigatórios que não foram preenchidos'
+        //$('#modalRetorno .modal-title').append('Erro na gravação')
+        //$('#modalRetorno .modal-body p').append('Existem campos obrigatórios que não foram preenchidos')
         $('#modalRetorno').modal('show')
     }
 
