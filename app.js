@@ -7,6 +7,16 @@ class Despesa {
         this.descricao = descricao
         this.valor = valor
     }
+
+    validarDados() {
+        for (let i in this) {
+            if(this[i] == undefined || this[i] == '' || this[i] == null){
+                return false
+            }
+        }
+
+        return true
+    }
 }
 
 class Bd {
@@ -25,7 +35,7 @@ class Bd {
     }
 
     gravar(d) {
-        
+
         let id = this.getProximoId()
 
         localStorage.setItem(id, JSON.stringify(d))
@@ -54,6 +64,16 @@ function cadastrarDespesa() {
         valor.value
     )
 
-    bd.gravar(despesa)
+    if (despesa.validarDados()) {
+        bd.gravar(despesa)
+        $('#modalRetorno .modal-title').append('Registro salva com sucesso')
+        $('#modalRetorno .modal-body p').append('Despesa cadastrada com sucesso')
+        $('#modalRetorno').modal('show')
+    } else {
+        $('#modalRetorno .modal-title').append('Erro na gravação')
+        $('#modalRetorno .modal-body p').append('Existem campos obrigatórios que não foram preenchidos')
+        $('#modalRetorno').modal('show')
+    }
+
 }
 
